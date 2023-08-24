@@ -3,9 +3,17 @@ require("dotenv").config();
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
-  solidity: "0.8.18",
+  solidity: {
+    version: "0.8.17",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 200,
+      },
+    },
+  },
   networks: {
-    sepolia: {
+    immutableZKTestnet: {
       url: "https://rpc.testnet.immutable.com/",
       accounts: [process.env.IMMUTABLE_ZK_TESTNET_PRIVATE_KEY],
     },
