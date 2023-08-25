@@ -2,7 +2,7 @@
 pragma solidity ^0.8.9;
 
 import '@imtbl/zkevm-contracts/contracts/token/erc721/abstract/ImmutableERC721Base.sol';
-
+// contracts/royalty-enforcement/RoyaltyAllowlist.sol
 contract MyERC721 is ImmutableERC721Base{
     uint256 private tokenCounter;
 
@@ -11,15 +11,15 @@ contract MyERC721 is ImmutableERC721Base{
 
     address public owner; // The owner of the contract
 
-    constructor() ImmutableERC721Base(
+    constructor(address royaltyAllowlist) ImmutableERC721Base(
             msg.sender,
             "ExampleToken",
             "EXT",
             "http://example.com/",
             "",
-            msg.sender,
-            msg.sender,
-            0
+            royaltyAllowlist,
+            0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48,
+            1000
         )
     {
         owner = msg.sender;

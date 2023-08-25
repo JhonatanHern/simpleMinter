@@ -8,13 +8,16 @@ const hre = require("hardhat");
 
 async function main() {
   // Get the contract factory
+  const RoyaltyList = await hre.ethers.getContractFactory("RoyaltyList");
   const MyERC721 = await hre.ethers.getContractFactory("MyERC721");
 
   // Deploy the contract
-  console.log("Deploying");
-  const myERC721 = await MyERC721.deploy();
-
-  // Wait for the contract to be deployed
+  console.log("Deploying allow list");
+  const allowList = await RoyaltyList.deploy();
+  await allowList.deployed();
+  // Deploy the contract
+  console.log("Deploying NFT contract");
+  const myERC721 = await MyERC721.deploy(allowList.address);
   await myERC721.deployed();
 
   // Print the contract address
